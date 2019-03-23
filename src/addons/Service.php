@@ -234,7 +234,7 @@ EOD;
             throw new Exception("addons.js文件没有写入权限");
         }
 
-        $file = Env::get('app_path') . 'extra' . DIRECTORY_SEPARATOR . 'addons.php';
+        $file = Env::get('config_path') . 'addons.php';
 
         $config = get_addon_autoload_config(true);
         if ($config['autoload'])
