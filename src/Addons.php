@@ -37,8 +37,8 @@ abstract class Addons
 
         // 初始化视图模型
         $config = ['view_path' => $this->addons_path];
-        $config = array_merge(Config::get('template.'), $config);
-        $this->view = new View($config, Config::get('template.tpl_replace_string'));
+        $config = array_merge(\think\facade\Config::get('template.'), $config);
+        $this->view = new View($config, \think\facade\Config::get('template.tpl_replace_string'));
 
         // 控制器初始化
         if (method_exists($this, 'initialize')) {
@@ -58,17 +58,17 @@ abstract class Addons
         if (empty($name)) {
             $name = $this->getName();
         }
-        $info = Config::get($this->infoRange.".".$name);
+        $info = \think\facade\Config::get($this->infoRange.".".$name);
         if ($info) {
             return $info;
         }
 
         $info_file = $this->addons_path . 'info.ini';
         if (is_file($info_file)) {
-            $info = Config::parse($info_file, '', $name, $this->infoRange);
+            $info = \think\facade\ConfigConfig::parse($info_file, '', $name, $this->infoRange);
             $info['url'] = addon_url($name);
         }
-        Config::set($this->infoRange.".".$name, $info);
+        \think\facade\Config::set($this->infoRange.".".$name, $info);
 
         return $info ? $info : [];
     }
@@ -84,7 +84,7 @@ abstract class Addons
         if (empty($name)) {
             $name = $this->getName();
         }
-        $config = Config::get($this->configRange.".".$name);
+        $config = \think\facade\Config::get($this->configRange.".".$name);
         if ($config) {
             return $config;
         }
@@ -98,7 +98,7 @@ abstract class Addons
             unset($temp_arr);
         }
 
-        Config::set($this->configRange.".".$name, $config);
+        \think\facade\Config::set($this->configRange.".".$name, $config);
 
         return $config;
     }
@@ -116,7 +116,7 @@ abstract class Addons
         }
         $config = $this->getConfig($name);
         $config = array_merge($config, $value);
-        Config::set($this->configRange.".".$name, $config);
+        \think\facade\Config::set($this->configRange.".".$name, $config);
         return $config;
     }
 
@@ -133,7 +133,7 @@ abstract class Addons
         }
         $info = $this->getInfo($name);
         $info = array_merge($info, $value);
-        Config::set($this->infoRange.".".$name, $info);
+        \think\facade\Config::set($this->infoRange.".".$name, $info);
         return $info;
     }
 
