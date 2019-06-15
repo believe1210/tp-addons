@@ -191,9 +191,7 @@ class Service
                     $templine = str_ireplace('__PREFIX__', config('database.prefix'), $templine);
                     $templine = str_ireplace('INSERT INTO ', 'INSERT IGNORE INTO ', $templine);
                     try {
-                        echo $templine;
                         $res = Db::execute($templine);
-                        var_dump($res);
                     } catch (\PDOException $e) {
                         //$e->getMessage();
                     }
