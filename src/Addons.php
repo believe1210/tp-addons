@@ -2,7 +2,7 @@
 
 namespace think;
 
-use think\facade\Config;
+#use think\facade\Config;
 use think\facade\View;
 
 /**
