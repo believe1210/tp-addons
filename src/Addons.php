@@ -2,7 +2,7 @@
 
 namespace think;
 
-#use think\facade\Config;
+
 use think\facade\View;
 
 /**
@@ -65,7 +65,7 @@ abstract class Addons
 
         $info_file = $this->addons_path . 'info.ini';
         if (is_file($info_file)) {
-            $info = \think\facade\ConfigConfig::parse($info_file, '', $name, $this->infoRange);
+            $info = \think\facade\Config::parse($info_file, '', $name, $this->infoRange);
             $info['url'] = addon_url($name);
         }
         \think\facade\Config::set($this->infoRange.".".$name, $info);
