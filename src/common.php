@@ -3,7 +3,7 @@
 use think\facade\App;
 use think\facade\Cache;
 use think\facade\Config;
-use think\facade\Exception;
+use think\Exception;
 use think\facade\Hook;
 use think\Loader;
 use think\facade\Route;
@@ -428,7 +428,7 @@ function set_addon_fullconfig($name, $array)
 {
     $file = ADDON_PATH . $name . DIRECTORY_SEPARATOR . 'config.php';
     if (!is_really_writable($file)) {
-        throw new Exception("文件没有写入权限");
+        throw new \Exception("文件没有写入权限");
     }
     if ($handle = fopen($file, 'w')) {
         fwrite($handle, "<?php\n\n" . "return " . var_export($array, TRUE) . ";\n");
